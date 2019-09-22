@@ -45,7 +45,7 @@ async function main() {
         let storage = await (await fetch("options.json")).json();
         if (localStorage !== null) {
             localStorage.colors = JSON.stringify(storage.colors);
-            localStorage.feed = storage.feed;
+            localStorage.feed = JSON.stringify(storage.feed);
             localStorage.date = storage.date;
             localStorage.time = storage.time;
             localStorage.shuffle = storage.shuffle;
@@ -74,9 +74,15 @@ async function main() {
     let CORS = !window.hasOwnProperty("browser")
         ? "https://cors-anywhere.herokuapp.com/"
         : "";
-    let feedURL = await getOpt("feed");
-    let feed = await parser.parseURL(CORS + feedURL);
-    feed.items.forEach(fillFeed);
+        
+    feeds = JSON.parse(await getOpt("feed"));
+    feeds.forEach(
+        async (item) => {
+            let feed = await parser.parseURL(CORS + item);
+            console.log(feed);
+            feed.items.forEach(fillFeed);
+        }
+    )
 }
 
 document.addEventListener("DOMContentLoaded", main);

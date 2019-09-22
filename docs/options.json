@@ -15,7 +15,10 @@
         "#607D8B"
     ],
     "shuffle": false,
-    "feed": "https://reddit.com/r/popular/.rss",
+    "feed":
+    [
+        "https://japantimes.co.jp/rss"
+    ],
     "time": "hh:mm A",
     "date": "dddd, MMMM Do, YYYY"
 }
