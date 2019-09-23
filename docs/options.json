@@ -17,8 +17,15 @@
     "shuffle": false,
     "feed":
     [
-        "https://japantimes.co.jp/rss"
+        "https://www.japantimes.co.jp/rss",
+        "https://www.forbes.com.mx/feed"
     ],
-    "time": "hh:mm A",
-    "date": "dddd, MMMM Do, YYYY"
+    "favourites":[
+        {
+            "url" : "https://www.reddit.com",
+            "logo": ""
+        }
+    ],
+    "time": "hh:mm:ss A",
+    "date": "dddd, MMMM D YYYY"
 }

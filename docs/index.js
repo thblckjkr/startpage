@@ -6,16 +6,25 @@ function changeColor(colors) {
         colors[Math.floor(Math.random() * colors.length)];
 }
 
-function fillFeed(item) {
-    let name = document.createElement("a");
-    name.className = "item";
-    name.href = item.link;
-    name.innerText = item.title;
-    if (item.hasOwnProperty("creator")) {
-        name.innerText += " • " + item.creator;
-    }
+function fillFeed(feed) {
+    let time = document.getElementById("time");
+    time.style.marginTop = "2%";
+    time.style.padding = "20px";
+
+    console.log(feed);
+
+    feed.items.forEach((item) =>{
+        let name = document.createElement("a");
+        name.className = "item";
+        name.href = item.link;
+        name.innerText = "";
+        name.target = "_blank";
+        if (item.hasOwnProperty("creator")) {
+            name.innerText += feed.title + item.title;
+        }
 
     feedEle.appendChild(name);
+    })
 }
 
 function changeTime(time, date) {
@@ -39,13 +48,13 @@ async function getOpt(opt) {
 async function main() {
     // for web demo
     if (!window.hasOwnProperty("browser")) {
-        console.log("WEB DEMO");
-        console.log("Change settings in browser console");
         console.log("Ex: localStorage.feed = 'https://reddit.com/r/popular/.rss'");
         let storage = await (await fetch("options.json")).json();
         if (localStorage !== null) {
             localStorage.colors = JSON.stringify(storage.colors);
             localStorage.feed = JSON.stringify(storage.feed);
+            localStorage.favourites = JSON.stringify(storage.favourites);
+
             localStorage.date = storage.date;
             localStorage.time = storage.time;
             localStorage.shuffle = storage.shuffle;
@@ -79,8 +88,7 @@ async function main() {
     feeds.forEach(
         async (item) => {
             let feed = await parser.parseURL(CORS + item);
-            console.log(feed);
-            feed.items.forEach(fillFeed);
+            fillFeed(feed)
         }
     )
 }
