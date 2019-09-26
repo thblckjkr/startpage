@@ -20,7 +20,7 @@ function fillFeed(feed) {
         name.innerText = "";
         name.target = "_blank";
         if (item.hasOwnProperty("creator")) {
-            name.innerText += feed.title + item.title;
+            name.innerText += feed.title + " | " + item.title;
         }
 
     feedEle.appendChild(name);

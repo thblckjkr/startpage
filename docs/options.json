@@ -23,7 +23,11 @@
     "favourites":[
         {
             "url" : "https://www.reddit.com",
-            "logo": ""
+            "icon": "reddit"
+        },
+        {
+            "url" : "https://www.messenger.com",
+            "letter": "Ms"
         }
     ],
     "time": "hh:mm:ss A",
