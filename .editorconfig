@@ -1,0 +1,9 @@
+[*]
+tab_width = 4
+indent_style = tab
+
+[*.js]
+tab_width = 3
+
+[*.css]
+tab_width = 3
