@@ -7,7 +7,8 @@
     [
         "https://www.japantimes.co.jp/rss",
         "https://www.forbes.com.mx/feed"
-    ],
+	],
+	"preload": false,
     "favourites":[
         {
             "url" : "https://www.reddit.com",

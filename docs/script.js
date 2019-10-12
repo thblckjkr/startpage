@@ -43,7 +43,8 @@ class Main {
 	init() {
 		this.setDate();
 		this.setColor();
-		this.loadRSS();
+		if(this.opt.get("preload"))
+			this.loadRSS();
 		this.loadFavourites();
 	}
 
@@ -134,6 +135,9 @@ class Main {
 
 	async fillFeed() {
 		let $f = document.getElementById("feed");
+		
+		if(!this.opt.get("preload"))
+			await this.loadRSS();
 
 		this.feed.forEach( (resource) => {
 
