@@ -43,10 +43,11 @@ body {
 * Favourites
 */
 #favourites {
-  transition: all 1s ease;
+  transition: all 1s;
   padding: 0 20px;
   margin: 5px auto;
   text-align: center;
+  overflow: hidden;
 }
 .favourite {
   transition: all 1s ease;

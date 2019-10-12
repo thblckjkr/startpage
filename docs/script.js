@@ -67,6 +67,21 @@ class Main {
 		}
 	}
 
+	async showFeed() {
+		let colors = await this.opt.get("feed");
+
+		let $time = document.getElementById("time");
+		$time.style.marginTop = "2%";
+		$time.style.padding = "20px";
+
+		setTimeout(() => {
+			let $favourites = document.getElementById("favourites");
+			$favourites.style.height = "0px";
+			// $favourites.style.display = "none";
+		}, 1000)
+
+	}
+
 	getFeed() {
 
 	}
