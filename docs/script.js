@@ -24,7 +24,7 @@ class OptionsMgr{
 			let res = browser.storage.local.get(opt);
 			return res[opt];
 		} else {
-			if (["colors", "shuffle"].includes(opt)) {
+			if (["colors", "feed", "favourites"].includes(opt)) {
 				return JSON.parse(localStorage[opt]);
 			} else {
 				return localStorage[opt];
@@ -40,8 +40,8 @@ class Main {
 
 	init() {
 		this.setDate();
-		var that = this;
-		that.setColor();
+		this.setColor();
+		this.loadFavourites();
 	}
 
 	async setDate() {
@@ -70,6 +70,32 @@ class Main {
 		}
 	}
 
+	async loadFavourites(){
+		let favourites = await this.opt.get("favourites");
+		let $f = document.getElementById("favourites");
+
+		favourites.forEach((item) => {
+			let $a = document.createElement("a");
+			$a.className = "favourite";
+			$a.href = item.url;
+			// $a.innerText = "";
+			$a.target = "_blank";
+
+			if (typeof(item.icon) !== "undefined") {
+				$a.innerHTML = '<div style="font-size: 2em;"> <i class="fa fa-' + item.icon + '"></i> </div>';
+			} else {
+				$a.innerHTML = '<div style="font-size: 2em;">' + item.text + '</div>';
+			}
+
+			if (item.hasOwnProperty("creator")) {
+				$a.innerText += feed.title + " | " + item.title;
+			}
+			
+			$f.appendChild($a);
+		})
+
+	}
+
 	async showFeed() {
 		let colors = await this.opt.get("feed");
 
@@ -82,12 +108,12 @@ class Main {
 		setTimeout(() => {
 			let $favourites = document.getElementById("favourites");
 			$favourites.style.height = "0px";
-			// $favourites.style.display = "none";
 		}, 1000)
 
 	}
 
 	async fillFeed(feed) {
+		let feed = await this.opt.get("feed")
 		feed.items.forEach((item) => {
 			let name = document.createElement("a");
 			name.className = "item";
@@ -116,10 +142,6 @@ class Main {
 				fillFeed(feed)
 			}
 		)
-	}
-
-	getFeed() {
-
 	}
 }
 
