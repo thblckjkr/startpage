@@ -87,6 +87,7 @@ async function main() {
 	feeds = JSON.parse(await getOpt("feed"));
 	feeds.forEach(
 		async (item) => {
+			console.log(CORS + item);
 			let feed = await parser.parseURL(CORS + item);
 			fillFeed(feed)
 		}

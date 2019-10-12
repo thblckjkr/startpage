@@ -6,8 +6,13 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="index.css">
         <meta charset="utf-8">
-    </head>
+	</head>
     <body>
+		<div class="cogBtn" id="configuration">
+			<span class="icon">
+				<i class="fa fa-cog fa-2x fa-fw" aria-hidden="true"></i>
+			</span>
+		</div>
         <div id="time">
             <span id="t">12:00 AM</span>
             <span id="d">Thursday, January 1, 1970</span>
@@ -23,11 +28,20 @@
                 Messenger
             </a>
         </div>
-        
+		
+		<div id="show-feed" class="feedButton">
+			<div class="text">
+				Feed
+			</div>
+			<span class="icon">
+				<i class="fa fa-sort-down fa-2x fa-fw"></i>
+			</span>
+		</div>
+
         <div id="feed"></div>
 
         <script src="../lib/rss-parser.min.js"></script>
         <script src="../lib/moment.js"></script>
-        <script src="index.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>
