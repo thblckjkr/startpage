@@ -48,6 +48,9 @@ class Main {
 		let timef = await this.opt.get("timeFormat");
 		let datef = await this.opt.get("dateFormat");
 
+		document.getElementById("t").innerText = moment().format(timef);
+		document.getElementById("d").innerText = moment().format(datef);
+
 		setInterval(() => {
 			document.getElementById("t").innerText = moment().format(timef);
 			document.getElementById("d").innerText = moment().format(datef);
@@ -74,12 +77,45 @@ class Main {
 		$time.style.marginTop = "2%";
 		$time.style.padding = "20px";
 
+		this.fillFeed();
+
 		setTimeout(() => {
 			let $favourites = document.getElementById("favourites");
 			$favourites.style.height = "0px";
 			// $favourites.style.display = "none";
 		}, 1000)
 
+	}
+
+	async fillFeed(feed) {
+		feed.items.forEach((item) => {
+			let name = document.createElement("a");
+			name.className = "item";
+			name.href = item.link;
+			name.innerText = "";
+			name.target = "_blank";
+			if (item.hasOwnProperty("creator")) {
+				name.innerText += feed.title + " | " + item.title;
+			}
+			
+			feedEle.appendChild(name);
+		})
+
+		// get rss feed
+		let parser = new RSSParser();
+		// use cors proxy on web demo
+		let CORS = !window.hasOwnProperty("browser")
+		? "https://cors-anywhere.herokuapp.com/"
+		: "";
+		
+		feeds = JSON.parse(await getOpt("feed"));
+		feeds.forEach(
+			async (item) => {
+				console.log(CORS + item);
+				let feed = await parser.parseURL(CORS + item);
+				fillFeed(feed)
+			}
+		)
 	}
 
 	getFeed() {

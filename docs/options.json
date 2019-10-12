@@ -16,6 +16,22 @@
         {
             "url" : "https://www.messenger.com",
             "letter": "Ms"
+		},
+		{
+            "url" : "https://www.facebook.com",
+            "icon": "facebook"
+		},
+		{
+            "url" : "https://www.instagram.com",
+            "icon": "instagram"
+		},
+		{
+            "url" : "https://www.twitter.com",
+            "icon": "twitter"
+		},
+		{
+            "url" : "https://www.youtube.com",
+            "icon": "youtube"
         }
     ],
     "timeFormat": "hh:mm:ss A",

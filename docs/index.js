@@ -10,9 +10,7 @@ function fillFeed(feed) {
 	let time = document.getElementById("time");
 	time.style.marginTop = "2%";
 	time.style.padding = "20px";
-	
-	console.log(feed);
-	
+
 	feed.items.forEach((item) =>{
 		let name = document.createElement("a");
 		name.className = "item";
