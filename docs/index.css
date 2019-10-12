@@ -21,10 +21,10 @@ body {
   font-size: 50px;
 }
 #feed {
-  display: flex;
   justify-content: center;
   margin: 50px 10% 0 10%;
   flex-wrap: wrap;
+  display: none;
 }
 .item {
   border: 1px transparent;

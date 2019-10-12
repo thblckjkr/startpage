@@ -1,4 +1,4 @@
-class OptionsMgr{
+class OptionsMgr {
 	constructor(){
 		this.loadOptions()
 	}
@@ -36,11 +36,14 @@ class OptionsMgr{
 class Main {
 	constructor() {
 		this.opt = new OptionsMgr();
+		this.parser = new RSSParser();
+		this.feed = [];
 	}
 
 	init() {
 		this.setDate();
 		this.setColor();
+		this.loadRSS();
 		this.loadFavourites();
 	}
 
@@ -97,9 +100,8 @@ class Main {
 	}
 
 	async showFeed() {
-		let colors = await this.opt.get("feed");
-
 		let $time = document.getElementById("time");
+		let $f = document.getElementById("feed");
 		$time.style.marginTop = "2%";
 		$time.style.padding = "20px";
 
@@ -108,40 +110,46 @@ class Main {
 		setTimeout(() => {
 			let $favourites = document.getElementById("favourites");
 			$favourites.style.height = "0px";
+			$f.style.display = "flex";
 		}, 1000)
-
 	}
 
-	async fillFeed(feed) {
-		let feed = await this.opt.get("feed")
-		feed.items.forEach((item) => {
-			let name = document.createElement("a");
-			name.className = "item";
-			name.href = item.link;
-			name.innerText = "";
-			name.target = "_blank";
-			if (item.hasOwnProperty("creator")) {
-				name.innerText += feed.title + " | " + item.title;
-			}
-			
-			feedEle.appendChild(name);
-		})
+	async loadRSS () {
+		var that = this;
+		let feedItems = await this.opt.get("feed");
 
-		// get rss feed
-		let parser = new RSSParser();
 		// use cors proxy on web demo
 		let CORS = !window.hasOwnProperty("browser")
 		? "https://cors-anywhere.herokuapp.com/"
 		: "";
 		
-		feeds = JSON.parse(await getOpt("feed"));
-		feeds.forEach(
+		feedItems.forEach(
 			async (item) => {
 				console.log(CORS + item);
-				let feed = await parser.parseURL(CORS + item);
-				fillFeed(feed)
+				let a = await this.parser.parseURL(CORS + item);
+				that.feed.push(a);
 			}
 		)
+	}
+
+	async fillFeed() {
+		let $f = document.getElementById("feed");
+
+		this.feed.forEach( (resource) => {
+
+			resource.items.forEach( (item) => {
+				let $a = document.createElement("a");
+				$a.className = "item";
+				$a.href = item.link;
+				$a.innerText = "";
+				$a.target = "_blank";
+				if (item.hasOwnProperty("creator")) {
+					$a.innerText += feed.title + " | " + item.title;
+				}
+				
+				$f.appendChild($a);
+			});
+		});
 	}
 }
 
