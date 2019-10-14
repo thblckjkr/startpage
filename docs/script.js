@@ -106,13 +106,13 @@ class Main {
 		$time.style.marginTop = "2%";
 		$time.style.padding = "20px";
 
-		this.fillFeed();
-
 		setTimeout(() => {
 			let $favourites = document.getElementById("favourites");
 			$favourites.style.height = "0px";
 			$f.style.display = "flex";
-		}, 1000)
+		}, 1000);
+
+		this.fillFeed();
 	}
 
 	async loadRSS () {
@@ -147,9 +147,8 @@ class Main {
 				$a.href = item.link;
 				$a.innerText = "";
 				$a.target = "_blank";
-				if (item.hasOwnProperty("creator")) {
-					$a.innerText += feed.title + " | " + item.title;
-				}
+
+				$a.innerText += item.title;
 				
 				$f.appendChild($a);
 			});

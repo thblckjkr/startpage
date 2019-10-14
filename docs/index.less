@@ -25,26 +25,28 @@ body {
 }
 
 #feed {
-    justify-content: center;
-    margin: 50px 10% 0 10%;
-    flex-wrap: wrap;
+	margin: 50px 10% 0 10%;
+	flex-wrap: wrap;
 	display: none;
+	justify-content: center;
 }
 
 .item {
-    border: 1px transparent;
-    padding: 5px;
-    margin: 5px;
-    text-decoration: none;
-    color: white;
+	background-color: #3e3e3e;
+	padding: 5px; margin: 5px;
 
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    flex-grow: 1;
+	text-decoration: none;
+	color: white;
+
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	/*   flex-grow: 1; */
+	width: 30%;
+	&:hover{
+		background-color: rgba(0, 0, 0, 0);
+	}
 }
-
 /*
 * Favourites
 */

@@ -21,22 +21,25 @@ body {
   font-size: 50px;
 }
 #feed {
-  justify-content: center;
   margin: 50px 10% 0 10%;
   flex-wrap: wrap;
   display: none;
+  justify-content: center;
 }
 .item {
-  border: 1px transparent;
+  background-color: #3e3e3e;
   padding: 5px;
   margin: 5px;
   text-decoration: none;
   color: white;
   word-wrap: break-word;
   text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
-  flex-grow: 1;
+  /*   flex-grow: 1; */
+  width: 30%;
+}
+.item:hover {
+  background-color: rgba(0, 0, 0, 0);
 }
 /*
 * Favourites
