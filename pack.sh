@@ -1,3 +1,4 @@
 #!/bin/bash
-
-zip -r src  
+rm extension/pack.zip
+cd src
+zip -r ../extension/pack.zip *

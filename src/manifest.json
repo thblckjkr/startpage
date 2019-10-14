@@ -2,15 +2,11 @@
     "manifest_version": 2,
     "name": "Personal Start Page",
     "version": "0.1.1",
-	"permissions": ["storage"],
-	"content_scripts": [
-		{
-		  "matches": ["*://*.mozilla.org/*"],
-		  "js": ["script.js"],
-		  "html" : ["index.html"],
-		  "css" : ["index.css"]
-		}
+	"permissions": [
+		"storage",
+		"bookmarks"
 	],
+	"offline_enabled": true,
 	"chrome_url_overrides": {
 		"newtab": "index.html"
 	}
