@@ -122,7 +122,7 @@ class Main {
 		let feedItems = await this.opt.get("feed");
 
 		// use cors proxy on web demo
-		let CORS = !window.hasOwnProperty("browser")
+		let CORS = window.hasOwnProperty("browser")
 		? "https://cors-anywhere.herokuapp.com/"
 		: "";
 		
@@ -161,3 +161,4 @@ class Main {
 // Main
 main = new Main();
 main.init();
+document.getElementById("show-feed").onclick = () => { main.showFeed(); }
