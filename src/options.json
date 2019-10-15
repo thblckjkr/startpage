@@ -6,7 +6,8 @@
     "feed":
     [
         "https://www.japantimes.co.jp/rss",
-        "https://www.forbes.com.mx/feed"
+		"https://www.forbes.com.mx/feed",
+		"https://syncedreview.com/rss"
 	],
 	"preload": false,
     "favourites":[
