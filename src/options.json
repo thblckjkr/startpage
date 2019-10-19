@@ -1,0 +1,41 @@
+{
+    "colors": [
+        "rgb(63, 81, 181)"
+    ],
+    "shuffle": false,
+    "feed":
+    [
+        "https://www.japantimes.co.jp/rss",
+		"https://www.forbes.com.mx/feed",
+		"https://syncedreview.com/rss"
+	],
+	"preload": false,
+    "favourites":[
+        {
+            "url" : "https://www.reddit.com",
+            "icon": "reddit"
+        },
+        {
+            "url" : "https://www.messenger.com",
+            "text": "Ms"
+		},
+		{
+            "url" : "https://www.facebook.com",
+            "icon": "facebook"
+		},
+		{
+            "url" : "https://www.instagram.com",
+            "icon": "instagram"
+		},
+		{
+            "url" : "https://www.twitter.com",
+            "icon": "twitter"
+		},
+		{
+            "url" : "https://www.youtube.com",
+            "icon": "youtube"
+        }
+    ],
+    "timeFormat": "hh:mm:ss A",
+    "dateFormat": "dddd, MMMM D YYYY"
+}

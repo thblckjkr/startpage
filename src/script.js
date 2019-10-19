@@ -4,7 +4,8 @@ class OptionsMgr {
 	}
 
 	async loadOptions() {
-		if ( !window.hasOwnProperty("browser") ) {
+		// TODO: add some special behavior to the extension
+		if ( window.hasOwnProperty("browser") ) {
 			if (localStorage !== null) {
 				let storage = await (await fetch("options.json")).json();
 
@@ -20,7 +21,7 @@ class OptionsMgr {
 	}
 
 	async get(opt){
-		if (window.hasOwnProperty("browser")) {
+		if (!window.hasOwnProperty("browser")) {
 			let res = browser.storage.local.get(opt);
 			return res[opt];
 		} else {
@@ -51,6 +52,7 @@ class Main {
 	async setDate() {
 		let timef = await this.opt.get("timeFormat");
 		let datef = await this.opt.get("dateFormat");
+		console.log(timef);
 
 		document.getElementById("t").innerText = moment().format(timef);
 		document.getElementById("d").innerText = moment().format(datef);
@@ -120,7 +122,7 @@ class Main {
 		let feedItems = await this.opt.get("feed");
 
 		// use cors proxy on web demo
-		let CORS = !window.hasOwnProperty("browser")
+		let CORS = window.hasOwnProperty("browser")
 		? "https://cors-anywhere.herokuapp.com/"
 		: "";
 		
@@ -159,3 +161,4 @@ class Main {
 // Main
 main = new Main();
 main.init();
+document.getElementById("show-feed").onclick = () => { main.showFeed(); }

@@ -1,0 +1,13 @@
+{
+    "manifest_version": 2,
+    "name": "Personal Start Page",
+    "version": "0.1.1",
+	"permissions": [
+		"storage",
+		"bookmarks"
+	],
+	"offline_enabled": true,
+	"chrome_url_overrides": {
+		"newtab": "index.html"
+	}
+}
