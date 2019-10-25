@@ -1,14 +1,19 @@
 {
-    "colors": [
-        "rgb(63, 81, 181)"
-    ],
-    "shuffle": false,
+	"settings": {
+		"timeFormat": "hh:mm:ss A",
+		"dateFormat": "dddd, MMMM D YYYY",
+		"preload": false,
+		
+		"colors": [
+			"rgb(63, 81, 181)"
+		],
+		"suffleColors": false
+	},
     "feed":
     [
         "https://www.japantimes.co.jp/rss",
         "https://www.forbes.com.mx/feed"
 	],
-	"preload": false,
     "favourites":[
         {
             "url" : "https://www.reddit.com",
@@ -34,7 +39,5 @@
             "url" : "https://www.youtube.com",
             "icon": "youtube"
         }
-    ],
-    "timeFormat": "hh:mm:ss A",
-    "dateFormat": "dddd, MMMM D YYYY"
+    ]
 }

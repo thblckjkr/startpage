@@ -3,31 +3,36 @@ class OptionsMgr {
 		this.loadOptions()
 	}
 
-	async loadOptions() {
-		if ( !window.hasOwnProperty("browser") ) {
-			if (localStorage !== null) {
-				let storage = await (await fetch("options.json")).json();
-
-				localStorage.colors = JSON.stringify(storage.colors);
-				localStorage.feed = JSON.stringify(storage.feed);
-				localStorage.favourites = JSON.stringify(storage.favourites);
-				
-				localStorage.dateFormat = storage.dateFormat;
-				localStorage.timeFormat = storage.timeFormat;
-				localStorage.shuffle = storage.shuffle;
-			}
-		}
-	}
-
 	async get(opt){
 		if (window.hasOwnProperty("browser")) {
 			let res = browser.storage.local.get(opt);
 			return res[opt];
 		} else {
-			if (["colors", "feed", "favourites"].includes(opt)) {
 				return JSON.parse(localStorage[opt]);
-			} else {
-				return localStorage[opt];
+		}
+	}
+
+	async getSetting(opt){
+		let temp = await this.get("settings");
+		return temp[opt];
+	}
+
+	async loadOptions() {
+		if ( window.hasOwnProperty("browser") ) {
+			if( browser.storage.local.get("colors") == null ){
+				let storage = await (await fetch("options.json")).json(); // Get defaults from a JSON file
+				browser.storage.local.set({"settings" : storage.settings});
+
+				browser.storage.local.set({"feed" : storage.feed});
+				browser.storage.local.set({"favourites" : storage.favourites});
+			}
+		} else {
+			if (localStorage !== null) {
+				let storage = await (await fetch("options.json")).json();
+
+				localStorage.settings = JSON.stringify(storage.settings);
+				localStorage.feed = JSON.stringify(storage.feed);
+				localStorage.favourites = JSON.stringify(storage.favourites);
 			}
 		}
 	}
@@ -43,14 +48,14 @@ class Main {
 	init() {
 		this.setDate();
 		this.setColor();
-		if(this.opt.get("preload"))
+		if(this.opt.getSetting("preload"))
 			this.loadRSS();
 		this.loadFavourites();
 	}
 
 	async setDate() {
-		let timef = await this.opt.get("timeFormat");
-		let datef = await this.opt.get("dateFormat");
+		let timef = await this.opt.getSetting("timeFormat");
+		let datef = await this.opt.getSetting("dateFormat");
 
 		document.getElementById("t").innerText = moment().format(timef);
 		document.getElementById("d").innerText = moment().format(datef);
@@ -62,15 +67,16 @@ class Main {
 	}
 
 	async setColor() {
-		let colors = await this.opt.get("colors");
-		let shuffle = await this.opt.get("shuffle");
+		let colors = await this.opt.getSetting("colors");
+		let shuffle = await this.opt.getSetting("suffleColors");
 
 		document.body.style.backgroundColor = 
 			colors[Math.floor(Math.random() * colors.length)];
 		
 		// change color every 5s if shuffle is enabled
 		if (shuffle) {
-			setInterval( this.setColor.bind(null, colors), 5000);
+			// TODO: Fix this
+			// setInterval( this.setColor.bind(null, colors), 5000);
 		}
 	}
 
@@ -136,7 +142,7 @@ class Main {
 	async fillFeed() {
 		let $f = document.getElementById("feed");
 		
-		if(!this.opt.get("preload"))
+		if(!this.opt.getSetting("preload"))
 			await this.loadRSS();
 
 		this.feed.forEach( (resource) => {
