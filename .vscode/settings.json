@@ -2,8 +2,8 @@
 	"emeraldwalk.runonsave": {
 		"commands": [
 			{
-				"match": "\\.js$",
-				"cmd": "cd src; zip ../extension/pack.zip *"
+				"match": "src\\\\*.*",
+				"cmd": "cd src; zip -r ../extension/pack.zip *"
 			}
 		]
 	}
