@@ -5,9 +5,12 @@
 		"preload": false,
 		
 		"colors": [
-			"rgb(63, 81, 181)"
+			"rgb(63, 81, 181)",
+			"#15336f",
+			"#292138"
 		],
-		"suffleColors": false
+		"suffleColors": false,
+		"suffleInterval" : 30	
 	},
     "feed":
     [

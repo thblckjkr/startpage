@@ -69,14 +69,19 @@ class Main {
 	async setColor() {
 		let colors = await this.opt.getSetting("colors");
 		let shuffle = await this.opt.getSetting("suffleColors");
+		let interval = await this.opt.getSetting("suffleInterval");
+
 
 		document.body.style.backgroundColor = 
 			colors[Math.floor(Math.random() * colors.length)];
 		
-		// change color every 5s if shuffle is enabled
+		// change color every Xs if shuffle is enabled
 		if (shuffle) {
 			// TODO: Fix this
-			// setInterval( this.setColor.bind(null, colors), 5000);
+			setInterval( () => {
+				document.body.style.backgroundColor = 
+					colors[Math.floor(Math.random() * colors.length)];
+			}, interval * 1000);
 		}
 	}
 
