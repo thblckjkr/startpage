@@ -170,3 +170,10 @@ class Main {
 // Main
 main = new Main();
 main.init();
+
+setTimeout(
+	function(){
+		main.showFeed();
+	},
+	2000
+)
