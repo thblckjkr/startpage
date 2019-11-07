@@ -154,13 +154,20 @@ class Main {
 
 			resource.items.forEach( (item) => {
 				let $a = document.createElement("a");
-				$a.className = "item";
+				$a.className = "feed";
 				$a.href = item.link;
-				$a.innerText = "";
 				$a.target = "_blank";
 
-				$a.innerText += item.title;
-				
+				let $t = document.createElement("div");
+				$t.className = "title";
+				$t.innerText += resource.title;
+
+				let $c = document.createElement("div");
+				$c.className = "content"
+				$c.innerText = item.title;
+
+				$a.appendChild($t); $a.appendChild($c);
+
 				$f.appendChild($a);
 			});
 		});

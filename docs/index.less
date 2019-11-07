@@ -24,6 +24,9 @@ body {
     font-size: 50px;
 }
 
+/*
+* RSS Feed
+*/
 #feed {
 	margin: 50px 10% 0 10%;
 	flex-wrap: wrap;
@@ -31,22 +34,34 @@ body {
 	justify-content: center;
 }
 
-.item {
+.feed {
 	background-color: #3e3e3e;
-	padding: 5px; margin: 5px;
-
+	margin: 5px;
+	align-items: center;
 	text-decoration: none;
 	color: white;
 
 	word-wrap: break-word;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	/*   flex-grow: 1; */
 	width: 30%;
-	&:hover{
-		background-color: rgba(0, 0, 0, 0);
+
+	transition-property: all;
+	transition-duration: 0.5s;
+	& > .title {
+		color: white;
+		text-align: center;
+		padding: 0.25em;
+	}
+	& > .content {
+		padding: 0.5em;
+		
+	}
+	&:hover {
+		background-color: #000000;
 	}
 }
+
 /*
 * Favourites
 */
@@ -79,6 +94,9 @@ body {
 	}
 }
 
+/*
+*	Buttons
+*/
 .feedButton{
 	margin: 0 auto;
 	position: fixed;
