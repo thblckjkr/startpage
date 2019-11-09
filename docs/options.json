@@ -3,6 +3,7 @@
 		"timeFormat": "hh:mm:ss A",
 		"dateFormat": "dddd, MMMM D YYYY",
 		"preload": false,
+		"feedAPI": "https://feed.jquery-plugins.net/load?url=",
 		
 		"colors": [
 			"rgb(63, 81, 181)",
@@ -10,7 +11,7 @@
 			"#292138"
 		],
 		"suffleColors": false,
-		"suffleInterval" : 30	
+		"suffleInterval" : 30
 	},
     "feed":
     [

@@ -101,10 +101,6 @@ class Main {
 			} else {
 				$a.innerHTML = '<div style="font-size: 2em;">' + item.text + '</div>';
 			}
-
-			if (item.hasOwnProperty("creator")) {
-				$a.innerText += feed.title + " | " + item.title;
-			}
 			
 			$f.appendChild($a);
 		})
@@ -123,36 +119,49 @@ class Main {
 			$f.style.display = "flex";
 		}, 1000);
 
-		this.fillFeed();
 	}
 
 	async loadRSS () {
+		// TODO. Make the feed more atomic
 		var that = this;
 		let feedItems = await this.opt.get("feed");
-
-		// use cors proxy on web demo
-		let CORS = !window.hasOwnProperty("browser")
-		? "https://cors-anywhere.herokuapp.com/"
-		: "";
+		// Use JQuery Feed api to get data
+		let feedAPI = await this.opt.getSetting("feedAPI");
 		
-		feedItems.forEach(
-			async (item) => {
-				console.log(CORS + item);
-				let a = await this.parser.parseURL(CORS + item);
-				that.feed.push(a);
+		feedItems.forEach((item) => {
+				let ajax = new XMLHttpRequest();
+
+				ajax.open("GET", feedAPI + item, true);
+				ajax.send();
+
+				ajax.onreadystatechange = function() {
+					if (ajax.readyState == 4 && ajax.status == 200) {
+						var data = ajax.responseText;
+						that.feed.push(
+							JSON.parse(data)
+						)
+						that.fillFeed();
+					}
+				}
 			}
 		)
 	}
 
 	async fillFeed() {
 		let $f = document.getElementById("feed");
-		
+
+		// Clear feed
+		$f.innerHTML = ""
+
 		if(!this.opt.getSetting("preload"))
 			await this.loadRSS();
 
 		this.feed.forEach( (resource) => {
+			let source = 
+				resource.data[0].link.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im);
+			source = source[1];
 
-			resource.items.forEach( (item) => {
+			resource.data.forEach( (item) => {
 				let $a = document.createElement("a");
 				$a.className = "feed";
 				$a.href = item.link;
@@ -160,7 +169,7 @@ class Main {
 
 				let $t = document.createElement("div");
 				$t.className = "title";
-				$t.innerText += resource.title;
+				$t.innerText += source;
 
 				let $c = document.createElement("div");
 				$c.className = "content"
@@ -180,7 +189,7 @@ main.init();
 
 setTimeout(
 	function(){
-		main.showFeed();
+		// main.showFeed();
 	},
 	2000
 )

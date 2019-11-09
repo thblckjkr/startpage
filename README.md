@@ -12,7 +12,7 @@ See https://momentjs.com/docs/#/displaying/format/ for formatting the date and t
 
 * Picks a random material design color for the bg color
 * Uses [Moment.js](https://momentjs.com)
-* Uses [rss-parser](https://www.npmjs.com/package/rss-parser)
+* Uses [JQuery Feed API](https://jquery-plugins.net/feed-api) *URL of API overrideable via Options*
 * Uses Roboto from [Google Fonts](https://fonts.google.com)
 
 ## How to use
