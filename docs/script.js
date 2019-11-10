@@ -108,6 +108,7 @@ class Main {
 	}
 
 	async showFeed() {
+		// TODO: Hide button of show feed
 		let $time = document.getElementById("time");
 		let $f = document.getElementById("feed");
 		$time.style.marginTop = "2%";
