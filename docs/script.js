@@ -175,7 +175,23 @@ class Main {
 				$c.className = "content"
 				$c.innerText = item.title;
 
-				$a.appendChild($t); $a.appendChild($c);
+				// Get a image from the description
+				let temp = document.createElement('div');
+				temp.innerHTML = item.description.trim();
+				let img = temp.getElementsByTagName("img");
+
+				$a.appendChild($t);
+
+				if(img.length > 0){
+					let $i = document.createElement("img");
+					$i.className = "image"
+					$i.src = img[0].src;
+
+					$a.className += " has-image";
+					$a.appendChild($i);
+				}
+
+				$a.appendChild($c);
 
 				$f.appendChild($a);
 			});
